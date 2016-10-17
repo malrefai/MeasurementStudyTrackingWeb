@@ -138,10 +138,10 @@ def drawGraph3D(graphData, online):
     fig=Figure(data=data, layout=layout)
     
     print('Open the Graph.....')
-    plot(fig, filename='{0}/{1}_By_Mohd_Alrefai'.format(destinationPath, exportName), image='svg')           #offline
+    plot(fig, filename='{0}/{1}_By_Mohd_Alrefai'.format(destinationPath, exportName), image='png')           #offline
     if online:
         print('Open the Graph Online.....')
-        py.plot(fig, filename='{0}_By_Mohd_Alrefai'.format(exportName))                 #online
+        py.plot(fig, filename='{0}_By_Mohd_Alrefai'.format(exportName))                                      #online
 
     
     # Save the figure as a png image from online:
@@ -210,7 +210,7 @@ def drawScatterCollor2D(scatterData, online):
     plot(fig, filename='{0}/{1}_By_Mohd_Alrefai'.format(destinationPath, exportName), image='png')           #offline
     if online:
         print('Open the Scatter Plot Online.....')
-        py.plot(fig, filename='{0}_By_Mohd_Alrefai'.format(exportName))                 #online
+        py.plot(fig, filename='{0}_By_Mohd_Alrefai'.format(exportName))                                      #online
 
     # Save the figure as a png image from online:
     #print('Save the  Scatter Plot.....')
@@ -250,8 +250,8 @@ def main(destinationPath, files, online=False):
     xTitle='URL Rank Accordint to Alexa'
     yTitle='Number of Third Party HTTP Request'
     exportName='ThirdPartyHttpRequest'
-    #scData = ((title, xTitle, yTitle, exportName, destinationPath), scatterPlot(destinationPath, files[2]))
-    #drawScatterCollor2D(scData, online)
+    scData = ((title, xTitle, yTitle, exportName, destinationPath), scatterPlot(destinationPath, files[2]))
+    drawScatterCollor2D(scData, online)
 
 
     #(Title, xTitle, yTitle, exportName)  #Q2
@@ -259,8 +259,8 @@ def main(destinationPath, files, online=False):
     xTitle='URL Rank Accordint to Alexa'
     yTitle='Number of Third Party Cookie'
     exportName='ThirdPartyCookie'
-    #scData = ((title, xTitle, yTitle, exportName, destinationPath), scatterPlot(destinationPath, files[3]))
-    #drawScatterCollor2D(scData, online)
+    scData = ((title, xTitle, yTitle, exportName, destinationPath), scatterPlot(destinationPath, files[3]))
+    drawScatterCollor2D(scData, online)
     
     #(Title, exportName)  #Q3
     title='Graph 3D\n(Third Party 3D Visualization)'

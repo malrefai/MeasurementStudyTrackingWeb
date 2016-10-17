@@ -38,26 +38,30 @@ def connectDB(databaseName):
 
 
 def createPageTable(thirdPartyDB):
-    thirdPartyDB.execute('DROP TABLE IF EXISTS page;')
-    thirdPartyDB.execute('''CREATE TABLE page(pageID INT PRIMARY KEY NOT NULL,
-                                                url TEXT NOT NULL,
-                                                waitSecs INT NOT NULL);''')
+    thirdPartyDB.execute('''CREATE TABLE IF NOT EXISTS page(pageID INT PRIMARY KEY NOT NULL,
+                                                            url TEXT NOT NULL,
+                                                            waitSecs INT NOT NULL);''')
+    thirdPartyDB.execute('''DELETE FROM page''')
+
 def createFirstHttpRequestTable(thirdPartyDB):
-    thirdPartyDB.execute('DROP TABLE IF EXISTS firstPartyHttpRequest;')
-    thirdPartyDB.execute('''CREATE TABLE firstPartyHttpRequest(pageID INT NOT NULL,
-                                                            firstRequest TEXT NOT NULL);''')
-def createThirdHttpRequestTable(thirdPartyDB):
-    thirdPartyDB.execute('DROP TABLE IF EXISTS thirdPartyHttpRequest;')    
-    thirdPartyDB.execute('''CREATE TABLE thirdPartyHttpRequest(pageID INT NOT NULL,
-                                                            thirdRequest TEXT NOT NULL);''')
-def createFirstCookieTable(thirdPartyDB):
-    thirdPartyDB.execute('DROP TABLE IF EXISTS firstPartyCookie;')        
-    thirdPartyDB.execute('''CREATE TABLE firstPartyCookie(pageID INT NOT NULL,
-                                                            firstCookie TEXT NOT NULL);''')
-def createThirdCookieTable(thirdPartyDB):
-    thirdPartyDB.execute('DROP TABLE IF EXISTS thirdPartyCookie;')            
-    thirdPartyDB.execute('''CREATE TABLE thirdPartyCookie(pageID INT NOT NULL,
-                                                            thirdCookie TEXT NOT NULL);''')
+    thirdPartyDB.execute('''CREATE TABLE IF NOT EXISTS firstPartyHttpRequest(pageID INT NOT NULL,
+                                                                             firstRequest TEXT NOT NULL);''')
+    thirdPartyDB.execute('''DELETE FROM firstPartyHttpRequest''')
+
+def createThirdHttpRequestTable(thirdPartyDB):   
+    thirdPartyDB.execute('''CREATE TABLE IF NOT EXISTS thirdPartyHttpRequest(pageID INT NOT NULL,
+                                                                             thirdRequest TEXT NOT NULL);''')
+    thirdPartyDB.execute('''DELETE FROM thirdPartyHttpRequest''')
+
+def createFirstCookieTable(thirdPartyDB):       
+    thirdPartyDB.execute('''CREATE TABLE IF NOT EXISTS firstPartyCookie(pageID INT NOT NULL,
+                                                                        firstCookie TEXT NOT NULL);''')
+    thirdPartyDB.execute('''DELETE FROM firstPartyCookie''')
+
+def createThirdCookieTable(thirdPartyDB):        
+    thirdPartyDB.execute('''CREATE TABLE IF NOT EXISTS thirdPartyCookie(pageID INT NOT NULL,
+                                                                        thirdCookie TEXT NOT NULL);''')
+    thirdPartyDB.execute('''DELETE FROM thirdPartyCookie''')
 
 def creatThirdPartyDB(thirdPartyDbPath):
     thirdPartyDB = connectDB(thirdPartyDbPath)
@@ -67,11 +71,11 @@ def creatThirdPartyDB(thirdPartyDbPath):
     else:
         print ('Opened thirdParty database successfully....')
 
-    #createPageTable(thirdPartyDB)
-    #createFirstHttpRequestTable(thirdPartyDB)
-    #createThirdHttpRequestTable(thirdPartyDB)
-    #createFirstCookieTable(thirdPartyDB)
-    #createThirdCookieTable(thirdPartyDB)
+    createPageTable(thirdPartyDB)
+    createFirstHttpRequestTable(thirdPartyDB)
+    createThirdHttpRequestTable(thirdPartyDB)
+    createFirstCookieTable(thirdPartyDB)
+    createThirdCookieTable(thirdPartyDB)
     return thirdPartyDB
 
 def insertValueIntoPage(thirdPartyDB, dataTuple):
